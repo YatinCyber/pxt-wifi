@@ -35,8 +35,8 @@ namespace esp8266 {
     //% blockId=esp8266_send_GoFSe_message
     //% block="send message to API:|API Key %apiKey|Chat ID %chatId|Message %message"
     export function sendGoFSeMessage(apiKey: string, chatId: number) {
-        sendCommand(apiKey)
-        sendCommand(chatId.toString())
+        serial.writeString('string: '+apiKey)
+        serial.writeString('value: '+chatId.toString())
 
         // Reset the upload successful flag.
         GoFSeMessageSent = false

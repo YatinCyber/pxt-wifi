@@ -1,12 +1,8 @@
 namespace esp8266 {
     // Flag to indicate whether the ESP8266 was initialized successfully.
     let esp8266Initialized = false
-
     // Buffer for data received from UART.
     let rxData = ""
-
-
-
     /**
      * Send AT command and wait for response.
      * Return true if expected response is received.
