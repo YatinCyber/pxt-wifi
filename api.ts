@@ -83,14 +83,12 @@ namespace esp8266 {
 
 
     /**
-         * Send GoFSe message.
-         * @param a GoFSe API Key.
-         * @param b The chat ID we want to send message to.
+         * Change status.
          */
     //% subcategory="API"
     //% weight=29
     //% blockGap=8
-    //% blockId=esp8266_send_GoFSe_message
+    //% blockId=esp8266_change_status
     //% block="Change status"
     export function testFunc() {
         GoFSeMessageSent = true
