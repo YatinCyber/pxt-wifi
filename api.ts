@@ -49,7 +49,7 @@ namespace esp8266 {
         if (sendCommand("AT+CIPSTART=\"TCP\",\"" + GoFSe_API_URL + "\",8080", "OK", 10000) == false) return
 
         // Construct the data to send.
-        let data = "GET /hi?name=" + formatUrl(keyname) + "&value=" + value
+        let data = "GET /hi?name=" + formatUrl('nhiet_do') + "&value=" + 18
         data += " HTTP/1.1\r\n"
         data += "Host: " + GoFSe_API_URL + "\r\n"
 
