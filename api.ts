@@ -41,7 +41,7 @@ namespace esp8266 {
 
         // Make sure the WiFi is connected.
         if (isWifiConnected() == false) {
-            console.log('Wifi is Disconnected');
+            // console.log('Wifi is Disconnected');
             return
         }
 
