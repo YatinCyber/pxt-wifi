@@ -12,13 +12,10 @@ const GoFSe_API_URL = "45.118.134.212"
 namespace esp8266 {
     // Flag to indicate whether the GoFSe message was sent successfully.
     let GoFSeMessageSent = false
-
-
-
     /**
      * Return true if the GoFSe message was sent successfully.
      */
-    //% subcategory="GoFSe"
+    //% subcategory="API"
     //% weight=30
     //% blockGap=8
     //% blockId=esp8266_is_GoFSe_tests_sent
@@ -27,25 +24,26 @@ namespace esp8266 {
         return GoFSeMessageSent
     }
 
-
-
     /**
      * Send GoFSe message.
      * @param apiKey GoFSe API Key.
      * @param chatId The chat ID we want to send message to.
      */
-    //% subcategory="GoFSe"
+    //% subcategory="API PRN"
     //% weight=29
     //% blockGap=8
     //% blockId=esp8266_send_GoFSe_message
-    //% block="send message to GoFSe:|API Key %apiKey|Chat ID %chatId|Message %message"
+    //% block="send message to API:|API Key %apiKey|Chat ID %chatId|Message %message"
     export function sendGoFSeMessage(keyname: string, value: number) {
 
         // Reset the upload successful flag.
         GoFSeMessageSent = false
 
         // Make sure the WiFi is connected.
-        if (isWifiConnected() == false) return
+        if (isWifiConnected() == false) {
+            console.log('Wifi is Disconnected');
+            return
+        }
 
         // Connect to GoFSe. Return if failed.
         if (sendCommand("AT+CIPSTART=\"TCP\",\"" + GoFSe_API_URL + "\",8080", "OK", 10000) == false) return
