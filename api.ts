@@ -19,7 +19,7 @@ namespace esp8266 {
     //% weight=30
     //% blockGap=8
     //% blockId=esp8266_is_GoFSe_tests_sent
-    //% block="GoFSe test sent"
+    //% block="API test sent"
     export function isGoFSeMessageSent(): boolean {
         return GoFSeMessageSent
     }
@@ -34,7 +34,7 @@ namespace esp8266 {
     //% blockGap=8
     //% blockId=esp8266_send_GoFSe_message
     //% block="send message to API:|API Key %apiKey|Chat ID %chatId|Message %message"
-    export function sendGoFSeMessage(keyname: string, value: number) {
+    export function sendGoFSeMessage(apiKey: string, chatId: number) {
 
         // Reset the upload successful flag.
         GoFSeMessageSent = false
@@ -49,7 +49,7 @@ namespace esp8266 {
         if (sendCommand("AT+CIPSTART=\"TCP\",\"" + GoFSe_API_URL + "\",8080", "OK", 10000) == false) return
 
         // Construct the data to send.
-        let data = "GET /hi?name=" + formatUrl(keyname) + "&value=" + value
+        let data = "GET /hi?name=" + formatUrl(apiKey) + "&value=" + chatId
         data += " HTTP/1.1\r\n"
         data += "Host: " + GoFSe_API_URL + "\r\n"
 
