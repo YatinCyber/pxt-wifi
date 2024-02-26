@@ -10,8 +10,7 @@
         "main.blocks",
         "main.ts",
         "README.md",
-        "api.ts",
-        "custom.ts"
+        "api.ts"
     ],
     "testFiles": [
         "test.ts"

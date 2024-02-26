@@ -91,10 +91,9 @@ namespace esp8266 {
     //% weight=29
     //% blockGap=8
     //% blockId=esp8266_send_GoFSe_message
-    //% block="Input a:|API Key %a|Chat ID %blockId|Message %message"
-    export function testFunc(a: string, b: number) {
-        serial.writeString('string: ' + a)
-        serial.writeString('value: ' + b)
+    //% block="Change status"
+    export function testFunc() {
+        GoFSeMessageSent = true
         return
     }
 
