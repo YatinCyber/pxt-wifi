@@ -43,7 +43,6 @@ namespace esp8266 {
 
         // Make sure the WiFi is connected.
         if (isWifiConnected() == false) {
-            // console.log('Wifi is Disconnected');
             return
         }
 
@@ -81,5 +80,23 @@ namespace esp8266 {
         GoFSeMessageSent = true
         return
     }
+
+
+    /**
+         * Send GoFSe message.
+         * @param a GoFSe API Key.
+         * @param b The chat ID we want to send message to.
+         */
+    //% subcategory="API"
+    //% weight=29
+    //% blockGap=8
+    //% blockId=esp8266_send_GoFSe_message
+    //% block="Input a:|API Key %a|Chat ID %blockId|Message %message"
+    export function testFunc(a: string, b: number) {
+        serial.writeString('string: ' + a)
+        serial.writeString('value: ' + b)
+        return
+    }
+
 
 }
