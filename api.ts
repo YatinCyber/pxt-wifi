@@ -29,7 +29,7 @@ namespace esp8266 {
      * @param apiKey GoFSe API Key.
      * @param chatId The chat ID we want to send message to.
      */
-    //% subcategory="API PRN"
+    //% subcategory="API"
     //% weight=29
     //% blockGap=8
     //% blockId=esp8266_send_GoFSe_message
@@ -49,7 +49,7 @@ namespace esp8266 {
         if (sendCommand("AT+CIPSTART=\"TCP\",\"" + GoFSe_API_URL + "\",8080", "OK", 10000) == false) return
 
         // Construct the data to send.
-        let data = "GET /hi?name=" + formatUrl('nhiet_do') + "&value=" + 18
+        let data = "GET /hi?name=" + formatUrl(keyname) + "&value=" + value
         data += " HTTP/1.1\r\n"
         data += "Host: " + GoFSe_API_URL + "\r\n"
 
