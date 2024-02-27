@@ -35,7 +35,7 @@ namespace esp8266 {
     //% blockId=esp8266_send_GoFSe_message
     //% block="send message to API:|API Key %apiKey|Chat ID %chatId|Message %message"
     export function sendGoFSeMessage(apiKey: string, chatId: number) {
-        serial.writeString('string: '+apiKey+'\n')
+        serial.writeString('string: '+ apiKey+ '\n')
         serial.writeString('value: ' + chatId.toString() + '\n')
 
         // Reset the upload successful flag.
@@ -47,12 +47,15 @@ namespace esp8266 {
         }
 
         // Connect to GoFSe. Return if failed.
-        if (sendCommand("AT+CIPSTART=\"TCP\",\"" + GoFSe_API_URL + "\",8080", "OK", 10000) == false) return
+        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + GoFSe_API_URL + '\",8080', "OK", 10000) == false) return
 
         // Construct the data to send.
-        let data = "GET /hi?name=" + formatUrl(apiKey) + "&value=" + chatId
+        // let data = "GET /hi?name=" + formatUrl(apiKey) + "&value=" + chatId
+        // data += "Host: " + GoFSe_API_URL + "\r\n"
+        let data = `GET /hi?name=${formatUrl(apiKey)}&value=${chatId}`
         data += " HTTP/1.1\r\n"
-        data += "Host: " + GoFSe_API_URL + "\r\n"
+        data += `Host: ${GoFSe_API_URL}\r\n`
+
 
         // Send the data.
         sendCommand("AT+CIPSEND=" + (data.length + 2))
