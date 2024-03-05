@@ -8,7 +8,7 @@
 
 // GoFSe API url.
 const GoFSe_API_URL = "45.118.134.212"
-const Test_Post_URL = "www.toptal.com/developers/postbin/1709600190126-2123610300477"
+const Test_Post_URL = "www.toptal.com"
 
 namespace esp8266 {
     // Flag to indicate whether the GoFSe message was sent successfully.
@@ -103,7 +103,7 @@ namespace esp8266 {
         let postData = "sendParam=" + formatUrl(sendParam);
 
         // Chuẩn bị yêu cầu POST với body
-        let postRequest = "POST /hi HTTP/1.1\r\n";
+        let postRequest = "POST /developers/postbin/1709597926207-2481456517707 HTTP/1.1\r\n";
         postRequest += "Host: " + Test_Post_URL + "\r\n";
         postRequest += "Content-Type: application/x-www-form-urlencoded\r\n";
         postRequest += "Content-Length: " + postData.length + "\r\n";
