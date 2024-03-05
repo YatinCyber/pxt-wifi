@@ -82,7 +82,7 @@ namespace esp8266 {
 
 
     /**
-         * Change status.
+         * Call POST request.
          * @param sendParam String Param.
          */
     //% subcategory="API"
@@ -111,7 +111,7 @@ namespace esp8266 {
         postRequest += postData;
 
         // Kết nối TCP đến URL
-        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL + '\",443', "OK", 10000) == false) return;
+        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL + '\",8080', "OK", 10000) == false) return;
 
         // Gửi yêu cầu POST
         sendCommand("AT+CIPSEND=" + (postRequest.length + 2));
