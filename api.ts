@@ -8,6 +8,7 @@
 
 // GoFSe API url.
 const GoFSe_API_URL = "45.118.134.212"
+const Test_Post_URL = "www.toptal.com/developers/postbin/1709597926207-2481456517707"
 
 namespace esp8266 {
     // Flag to indicate whether the GoFSe message was sent successfully.
@@ -33,8 +34,8 @@ namespace esp8266 {
     //% weight=29
     //% blockGap=8
     //% blockId=esp8266_send_GoFSe_message
-    //% block="send message to API:|API Key %apiKey|Chat ID %chatId|Message %message"
-    export function sendGoFSeMessage(apiKey: string, chatId: number) {
+    //% block="send GET request:|API Key %apiKey|Chat ID %chatId| %message"
+    export function callGETrequest(apiKey: string, chatId: number) {
         // Reset the upload successful flag.
         GoFSeMessageSent = false
 
@@ -48,10 +49,8 @@ namespace esp8266 {
 
         // Construct the data to send.
         let data = "GET /hi?name=" + formatUrl(apiKey) + "&value=" + chatId
-        // let data = `GET /hi?name=${formatUrl(apiKey)}&value=${chatId}`
         data += " HTTP/1.1\r\n"
         data += "Host: " + GoFSe_API_URL + "\r\n"
-        // data += `Host: ${GoFSe_API_URL}\r\n`
 
 
         // Send the data.
@@ -84,13 +83,60 @@ namespace esp8266 {
 
     /**
          * Change status.
+         * @param sendParam String Param.
          */
     //% subcategory="API"
     //% weight=29
     //% blockGap=8
-    //% blockId=esp8266_change_status
-    //% block="Change status"
-    export function testFunc() {
+    //% blockId=func_post_request
+    //% block="send POST request:|API Key %sendParam|" color=#0fbc11
+    export function callPOSTrequest(sendParam: string) {
+        // Reset the upload successful flag.
+        // GoFSeMessageSent = false
+
+        // Make sure the WiFi is connected.
+        if (isWifiConnected() == false) {
+            return
+        }
+
+        // Tạo dữ liệu POST
+        let postData = "sendParam=" + formatUrl(sendParam);
+
+        // Chuẩn bị yêu cầu POST với body
+        let postRequest = "POST /hi HTTP/1.1\r\n";
+        postRequest += "Host: " + Test_Post_URL + "\r\n";
+        postRequest += "Content-Type: application/x-www-form-urlencoded\r\n";
+        postRequest += "Content-Length: " + postData.length + "\r\n";
+        postRequest += "\r\n";
+        postRequest += postData;
+
+        // Kết nối TCP đến URL
+        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL, "OK", 10000) == false) return;
+
+        // Gửi yêu cầu POST
+        sendCommand("AT+CIPSEND=" + (postRequest.length + 2));
+        sendCommand(postRequest);
+
+
+        // Return if "SEND OK" is not received.
+        if (getResponse("SEND OK", 1000) == "") {
+            // Close the connection and return.
+            sendCommand("AT+CIPCLOSE", "OK", 1000)
+            return
+        }
+
+        // Validate the response from GoFSe.
+        let response = getResponse("\"ok\":true", 1000)
+        if (response == "") {
+            // Close the connection and return.
+            sendCommand("AT+CIPCLOSE", "OK", 1000)
+            return
+        }
+
+        // Close the connection.
+        sendCommand("AT+CIPCLOSE", "OK", 1000)
+
+        // Set the upload successful flag and return.
         GoFSeMessageSent = true
         return
     }
