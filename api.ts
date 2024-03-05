@@ -89,7 +89,7 @@ namespace esp8266 {
     //% weight=29
     //% blockGap=8
     //% blockId=func_post_request
-    //% block="send POST request:|API Key %sendParam|" color=#0fbc11
+    //% block="send POST request:|Param %sendParam|" color=#0fbc11
     export function callPOSTrequest(sendParam: string) {
         // Reset the upload successful flag.
         // GoFSeMessageSent = false
@@ -111,7 +111,7 @@ namespace esp8266 {
         postRequest += postData;
 
         // Kết nối TCP đến URL
-        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL, "OK", 10000) == false) return;
+        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL + '\",443', "OK", 10000) == false) return;
 
         // Gửi yêu cầu POST
         sendCommand("AT+CIPSEND=" + (postRequest.length + 2));
