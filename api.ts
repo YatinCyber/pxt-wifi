@@ -103,7 +103,9 @@ namespace esp8266 {
         let postData = "sendParam=" + formatUrl(sendParam);
 
         // Chuẩn bị yêu cầu POST với body
-        let postRequest = "POST /developers/postbin/1709597926207-2481456517707 HTTP/1.1\r\n";
+        let postRequest = "POST /developers/postbin/1709597926207-2481456517707";
+        postRequest += " HTTP/1.1\r\n"
+
         postRequest += "Host: " + Test_Post_URL + "\r\n";
         postRequest += "Content-Type: application/x-www-form-urlencoded\r\n";
         postRequest += "Content-Length: " + postData.length + "\r\n";
@@ -111,7 +113,7 @@ namespace esp8266 {
         postRequest += postData;
 
         // Kết nối TCP đến URL
-        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL + '\",8080', "OK", 10000) == false) return;
+        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL + '\",443', "OK", 10000) == false) return;
 
         // Gửi yêu cầu POST
         sendCommand("AT+CIPSEND=" + (postRequest.length + 2));
