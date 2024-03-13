@@ -8,7 +8,7 @@
 
 // GoFSe API url.
 const GoFSe_API_URL = "45.118.134.212"
-const Test_Post_URL = "www.toptal.com"
+const Test_Post_URL = "toptal.com"
 
 namespace esp8266 {
     // Flag to indicate whether the GoFSe message was sent successfully.
@@ -46,14 +46,9 @@ namespace esp8266 {
 
         // Connect to GoFSe. Return if failed.
         if (sendCommand('AT+CIPSTART=\"TCP\",\"' + GoFSe_API_URL + '\",8080', "OK", 10000) == false) return
-
-        // Construct the data to send.
         let data = "GET /hi?name=" + formatUrl(apiKey) + "&value=" + chatId
         data += " HTTP/1.1\r\n"
         data += "Host: " + GoFSe_API_URL + "\r\n"
-
-
-        // Send the data.
         sendCommand("AT+CIPSEND=" + (data.length + 2))
         sendCommand(data)
 
@@ -100,12 +95,11 @@ namespace esp8266 {
         }
 
         // Tạo dữ liệu POST
-        let postData = "sendParam=" + formatUrl(sendParam);
+        let postData = '{/"sendParam/"=' + ''+formatUrl(sendParam) +'}';
 
         // Chuẩn bị yêu cầu POST với body
-        let postRequest = "POST /developers/postbin/1709597926207-2481456517707";
+        let postRequest = "POST /developers/postbin/b/1709609805693-9634287878870";
         postRequest += " HTTP/1.1\r\n"
-
         postRequest += "Host: " + Test_Post_URL + "\r\n";
         postRequest += "Content-Type: application/x-www-form-urlencoded\r\n";
         postRequest += "Content-Length: " + postData.length + "\r\n";
@@ -113,7 +107,7 @@ namespace esp8266 {
         postRequest += postData;
 
         // Kết nối TCP đến URL
-        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL + '\",443', "OK", 10000) == false) return;
+        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL, "OK", 10000) == false) return;
 
         // Gửi yêu cầu POST
         sendCommand("AT+CIPSEND=" + (postRequest.length + 2));
