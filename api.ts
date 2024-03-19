@@ -8,7 +8,7 @@
 
 // GoFSe API url.
 const GoFSe_API_URL = "45.118.134.212"
-const Test_Post_URL = "eofdxn8x4ze760p.m.pipedream.net"
+const Test_Post_URL = "localhost:5083"
 
 namespace esp8266 {
     // Flag to indicate whether the GoFSe message was sent successfully.
@@ -101,7 +101,7 @@ namespace esp8266 {
         let postData = JSON.stringify({ name:"John", age:"42"});
 
         // Chuẩn bị yêu cầu POST với body
-        let postRequest = "POST /";
+        let postRequest = "POST /api/Test";
         postRequest += " HTTP/1.1\r\n"
         postRequest += "Host: " + Test_Post_URL + "\r\n";
         postRequest += "Content-Type: application/json\r\n"; 
