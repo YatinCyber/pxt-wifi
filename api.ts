@@ -8,7 +8,7 @@
 
 // GoFSe API url.
 const GoFSe_API_URL = "45.118.134.212"
-const Test_Post_URL = "localhost:5083"
+const Test_Post_URL = "171.248.36.55"
 
 namespace esp8266 {
     // Flag to indicate whether the GoFSe message was sent successfully.
@@ -45,7 +45,7 @@ namespace esp8266 {
         }
 
         // Connect to GoFSe. Return if failed.
-        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + GoFSe_API_URL + '\",8080', "OK", 10000) == false) return
+        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL + '\",3000', "OK", 10000) == false) return
         let data = "GET /hi?name=" + formatUrl(apiKey) + "&value=" + chatId
         // let data = "GET /"
 
