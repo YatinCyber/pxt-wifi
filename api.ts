@@ -96,18 +96,16 @@ namespace esp8266 {
 
         // Tạo dữ liệu POST
         // let postData = '{/"sendParam/"=' + ''+formatUrl(sendParam) +'}';
-        let postData = JSON.stringify("name=John%20Doe&age=42");
+        let postData = JSON.stringify({ name:"John", age:"42"});
 
         // Chuẩn bị yêu cầu POST với body
         let postRequest = "POST /";
         postRequest += " HTTP/1.1\r\n"
-        postRequest += "User-Agent: -\r\n"
         postRequest += "Host: " + Test_Post_URL + "\r\n";
-        // postRequest += "Accept: */*\r\n"
         postRequest += "Content-Type: application/json\r\n"; 
-        // postRequest += "Content-Length: " + postData.length + "\r\n";
+        postRequest += "Content-Length: 100\r\n";
         postRequest += "\r\n";
-        // postRequest += postData;
+        postRequest += postData;
 
         // Kết nối TCP đến URL
         if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL, "OK", 10000) == false) return;
