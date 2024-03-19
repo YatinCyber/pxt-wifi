@@ -45,8 +45,10 @@ namespace esp8266 {
         }
 
         // Connect to GoFSe. Return if failed.
-        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + GoFSe_API_URL + '\",8080', "OK", 10000) == false) return
-        let data = "GET /hi?name=" + formatUrl(apiKey) + "&value=" + chatId
+        if (sendCommand('AT+CIPSTART=\"TCP\",\"' + Test_Post_URL + '\",8080', "OK", 10000) == false) return
+        // let data = "GET /hi?name=" + formatUrl(apiKey) + "&value=" + chatId
+        let data = "GET /"
+
         data += " HTTP/1.1\r\n"
         data += "Host: " + GoFSe_API_URL + "\r\n"
         sendCommand("AT+CIPSEND=" + (data.length + 2))
