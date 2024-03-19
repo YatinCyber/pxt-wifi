@@ -96,7 +96,7 @@ namespace esp8266 {
 
         // Tạo dữ liệu POST
         // let postData = '{/"sendParam/"=' + ''+formatUrl(sendParam) +'}';
-        let postData = JSON.stringify(sendParam);
+        let postData = JSON.stringify("name=John%20Doe&age=42");
 
         // Chuẩn bị yêu cầu POST với body
         let postRequest = "POST /";
